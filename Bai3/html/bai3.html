@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bai 3</title>
+    <link
+      rel="stylesheet"
+      href="../../bootstrap-4.6.2-dist/css/bootstrap.min.css"
+    />
+    <script src="../../bootstrap-4.6.2-dist/js/jquery-3.7.1.min.js"></script>
+    <script src="../../bootstrap-4.6.2-dist/js/bootstrap.min.js"></script>
+    <style>
+      [class*="col-"] {
+        margin: 0px auto;
+        padding: 0px;
+      }
+      .mauNen {
+        color: blue;
+        background-color: #ecfdea;
+      }
+      .table td {
+        color: blue;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        //Kiểm tra họ tên
+        function kiemTraHoTen() {
+          let hoTen = $("#hoTen").val();
+          if (hoTen == "") {
+            alert("Họ tên không được để trống");
+            return false;
+          }
+          return true;
+        }
+
+        //Kiểm tra tên đăng nhập có ít nhất 6 ký tự
+        function kiemTraTenDN() {
+          let tenDN = $("#tenDN").val();
+          if (tenDN == "") {
+            alert("Tên đăng nhập không được để trống");
+            return false;
+          } else if (tenDN.length < 6) {
+            alert("Tên đăng nhập phải có ít nhất 6 ký tự");
+            return false;
+          }
+          return true;
+        }
+
+        // Kiểm tra mật khẩu
+        function kiemTraMatKhau() {
+          let pass = $("#pass").val();
+          if (pass == "") {
+            alert("Mật khẩu không được để trống");
+            return false;
+          }
+          return true;
+        }
+
+        //Kiểm tra xác nhận mật khẩu
+        function kiemTraReMatKhau() {
+          let pass = $("#pass").val();
+          let repass = $("#repass").val();
+          if (repass == "") {
+            alert("Xác nhận mật khẩu không được để trống");
+            return false;
+          } else if (pass != repass) {
+            alert("Mật khẩu và xác nhận mật khẩu không trùng khớp");
+            return false;
+          }
+          return true;
+        }
+
+        //Kiểm tra ngày sinh
+        function kiemTraNgaySinh() {
+          let ngaySinh = $("#ngaySinh").val();
+          if (ngaySinh == "") {
+            alert("Ngày sinh không được để trống");
+            return false;
+          }
+          return true;
+        }
+
+        //Kiểm tra điện thoại phải là số
+        function kiemTraDienThoai() {
+          let dienThoai = $("#dienThoai").val();
+          if (dienThoai != "") {
+            if (isNaN(dienThoai)) {
+              alert("Điện thoại phải là số");
+              return false;
+            }
+          }
+          return true;
+        }
+
+        //Kiểm tra email
+        function kiemTraEmail() {
+          let email = $("#mail").val();
+          if (email.trim() === "") {
+            alert("Bạn chưa nhập email!");
+            return false;
+          } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(email)) {
+            alert("Email không hợp lệ!");
+            return false;
+          }
+          return true;
+        }
+
+        $("#btnDK").click(function (e) {
+          if (
+            kiemTraHoTen() &&
+            kiemTraTenDN() &&
+            kiemTraMatKhau() &&
+            kiemTraReMatKhau() &&
+            kiemTraNgaySinh() &&
+            kiemTraDienThoai() &&
+            kiemTraEmail()
+          ) {
+            localStorage.setItem("hoTen", $("#hoTen").val());
+            localStorage.setItem("tenDN", $("#tenDN").val());
+            localStorage.setItem("pass", $("#pass").val());
+            localStorage.setItem("ngaySinh", $("#ngaySinh").val());
+            localStorage.setItem("dienThoai", $("#dienThoai").val());
+            localStorage.setItem("diaChi", $("#diaChi").val());
+            localStorage.setItem("email", $("#mail").val());
+            localStorage.setItem("soThich", $("#soThich").val());
+            let w = window.open("thongtin.html", "_self");
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container mauNen">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3>Register Form</h3>
+          <form action="">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <td class="float-right">
+                    <p>Họ và tên <span class="err">(*):</span></p>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="hoTen"
+                      id="hoTen"
+                      class="float-left"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="float-right">
+                    <p>Tên đăng nhập <span class="err">(*):</span></p>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="tenDN"
+                      id="tenDN"
+                      class="float-left"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="float-right">
+                    <p>Mật khẩu <span class="err">(*):</span></p>
+                  </td>
+                  <td>
+                    <input
+                      type="password"
+                      name="pass"
+                      id="pass"
+                      class="float-left"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="float-right">
+                    <p>Xác nhận mật khẩu <span class="err">(*):</span></p>
+                  </td>
+                  <td>
+                    <input
+                      type="password"
+                      name="repass"
+                      id="repass"
+                      class="float-left"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="float-right">
+                    <p>Ngày sinh <span class="err">(*):</span></p>
+                  </td>
+                  <td>
+                    <input
+                      type="date"
+                      name="ngaySinh"
+                      id="ngaySinh"
+                      class="float-left"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="float-right"><p>Điện thoại :</p></td>
+                  <td>
+                    <input
+                      type="text"
+                      name="dienThoai"
+                      id="dienThoai"
+                      class="float-left"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="float-right"><p>Địa chỉ :</p></td>
+                  <td>
+                    <input
+                      type="text"
+                      name="diaChi"
+                      id="diaChi"
+                      class="float-left"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="float-right"><p>Email khác :</p></td>
+                  <td>
+                    <input
+                      type="email"
+                      name="mail"
+                      id="mail"
+                      class="float-left"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="float-right"><p>Sở thích :</p></td>
+                  <td>
+                    <select name="soThich" id="soThich" class="float-left">
+                      <option value="1">Ca nhạc</option>
+                      <option value="2">Thể thao</option>
+                      <option value="3">Đọc sách</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class="float-left">
+                    <button class="btn btn-light" type="button" id="btnDK">
+                      Đăng ký
+                    </button>
+                    <button class="btn btn-light" type="button">Hủy</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
